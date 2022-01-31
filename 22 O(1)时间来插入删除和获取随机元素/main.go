@@ -1,6 +1,9 @@
 package main
 
-import "math/rand"
+import (
+	"fmt"
+	"math/rand"
+)
 
 type RandomizedSet struct {
 	arr []int
@@ -47,6 +50,11 @@ func (s *RandomizedSet) GetRandom() int {
 	return s.arr[random]
 }
 
-func main() {
+type A struct{}
 
+func main() {
+	arr := make([]A, 4)
+	fmt.Println("扩容前容量是 : ", cap(arr))
+	arr = append(arr, []A{{}, {}, {}, {}, {}}...)
+	fmt.Println("扩容后容量是 : ", cap(arr))
 }
