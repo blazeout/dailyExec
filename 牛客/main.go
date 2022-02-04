@@ -1,33 +1,39 @@
 package main
 
-import(
-"fmt"
+import (
+	"fmt"
+	"time"
 )
 
-func main() {
-	str := ""
-	for {
-		n, _ := fmt.Scan(&str)
-		if n == 0 {
-			break
-		} else {
-			mp := map[byte]bool{}
-			b1 := []byte(str)
-			for  _, v := range b1 {
-				mp[v] = true
-			}
-			length := len(b1)
-			for i := 0; i < length; i++ {
-				v := b1[i]
-				if mp[v] == true {
-					mp[v] = false
-					continue
-				}else {
+// 使用三个channel控制打印流程即可
+var ch1 = make(chan bool, 1)
+var ch2 = make(chan bool, 1)
+var ch3 = make(chan bool, 1)
 
-				}
-			}
+// 使用两个协程来交替打印数字和字符, 1A2B这种
 
-			fmt.Println(string(b1))
-		}
+func f1() {
+	// 打印数字
+	for i := 1; i <= 26; i++ {
+		<-ch1
+		time.Sleep(time.Second / 2)
+		fmt.Print(i)
+		ch2 <- true
 	}
+}
+
+func f2() {
+	for i := 'A'; i <= 'Z'; i++ {
+		<-ch2
+		fmt.Print(string(i))
+		ch1 <- true
+	}
+	ch3 <- true
+}
+
+func main() {
+	ch1 <- true
+	go f1()
+	go f2()
+	<-ch3
 }
