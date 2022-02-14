@@ -1,6 +1,9 @@
 package main
 
-import "sort"
+import (
+	"fmt"
+	"sort"
+)
 
 func minimumRemoval(beans []int) int64 {
 	// 排序后, 遍历
@@ -20,4 +23,9 @@ func max(a, b int) int {
 		return a
 	}
 	return b
+}
+
+func main() {
+	a := 1e6
+	fmt.Printf("%#v", a)
 }
