@@ -1,4 +1,4 @@
-package _17_1比特与2比特字符
+package _19_1比特与2比特字符
 
 func isOneBitCharacter(bits []int) bool {
 	// 遇到1就走两位, 遇到0就走一位, 判断是否能到达最后一个0即可
