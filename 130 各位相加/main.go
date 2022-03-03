@@ -1,4 +1,6 @@
-package _30_各位相加
+package main
+
+import "fmt"
 
 func addDigits(num int) int {
 	for num > 9 {
@@ -19,4 +21,8 @@ func ret(a int) int {
 // 一步到位, 数根原理
 func addDigits2(num int) int {
 	return (num-1)%9 + 1
+}
+
+func main() {
+	fmt.Println(-5 % 5)
 }
