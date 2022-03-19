@@ -22,6 +22,14 @@ func reverseWords(s string) string {
 }
 
 func main() {
-	ret := reverseWords("Let's take LeetCode contest")
-	fmt.Println(ret)
+	// 因为要是同一条调用链上的panic才能被defer捕捉并且调用recover方法
+	go func() {
+		defer func() {
+			if err := recover(); err != nil {
+				fmt.Println(err, "Recover")
+			}
+		}()
+
+	}()
+	panic("test")
 }
