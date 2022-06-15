@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Pod
+metadata:
+  name: ssd-monitor-daemonSet
+  namespace: default
+  labels:
+    app: kubia
+spec:
+  containers:
+  - name: kubia
+    image: wangjiahao123/kubia
+    ports:
+    - containerPort: 80 # 容器自己暴露的port
+      Port: 1334 # 暴露给集群中的port
+      nodePort: 21313 # 创建一个service 暴露给集群外部的port
